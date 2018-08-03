@@ -15,6 +15,11 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+var corsOptions = {
+  origin:[ 'http://localhost:4000']
+}
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -24,11 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // connect to database
 mongoose.connect(config.database);
 
-var corsOptions = {
-  origin:[ 'http://localhost:4200']
-}
 
-app.use(cors(corsOptions))
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
