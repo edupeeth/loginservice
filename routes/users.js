@@ -11,9 +11,9 @@ router.post('/login', function (req, res, next) {
       console.log(err);
       res.status(400).send(err);
     } else if (data && data.password == req.body.password) {      
-        res.status(200).send({ "Success": "User logged in successfully" });     
+        res.send({status: 200, "msg": "User logged in successfully" });     
     } else {
-      res.status(401).send({ "Success": "Wrong username/password." });
+      res.status(401).send({ "msg": "Wrong username/password." });
     }
   });
 });
@@ -26,9 +26,9 @@ router.put('/reset', function (req, res, next) {
       console.log("Errror "+err)           
       res.status(400).send(err);
     } else if (result) {     
-      res.status(200).send({"Success": "Password reset successfully."});
+      res.send({status: 200, msg: "Password reset successfully."});
     } else {
-      res.status(401).send({ "status": "No such user present" })
+      res.status(401).send({ msg: "No such user present" })
     }
   });
 });
@@ -55,7 +55,7 @@ router.post('/signup', function (req, res) {
           if (err) {           
             res.status(400).send(err);
           } else if (user) {            
-            res.send(200 , "User Created Successfully" );
+            res.send({status: 200, msg : 'User Created Successfully' });
           }
         });
       }
@@ -82,7 +82,7 @@ router.delete('/users/:userId', function (req, res) {
       console.log(err);
       res.status(400).send(err);
     } else if(data) {   
-      res.status(200).send({"Success":"delete"});
+      res.send({status: 200 , msg: 'User deleted successfully' });
     }    
   });
 });
